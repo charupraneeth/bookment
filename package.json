@@ -1,0 +1,26 @@
+{
+  "name": "bookment",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "start": "node app.js",
+    "dev": "nodemon app.js"
+  },
+  "keywords": [
+    "bookment",
+    "books app",
+    "review"
+  ],
+  "author": "charu praneeth",
+  "license": "MIT",
+  "dependencies": {
+    "body-parser": "^1.19.0",
+    "express": "^4.17.1",
+    "nedb": "^1.8.0"
+  },
+  "devDependencies": {
+    "convert-csv-to-json": "^1.0.0",
+    "nodemon": "^2.0.4"
+  }
+}
