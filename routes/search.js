@@ -19,8 +19,8 @@ router.post('/',async (req,res)=>{
         if(!isNaN(str)) return str
         str = str.split(" ");
 
-        for (var i = 0, x = str.length; i < x; i++) {
-            str[i] = str[i][0].toUpperCase() + str[i].substr(1);
+        for (let i = 0 ; i < str.length; i++) {
+            str[i] = str[i][0].toUpperCase() + str[i].substring(1);
         }
 
         return str.join(" ");
@@ -33,7 +33,18 @@ router.post('/',async (req,res)=>{
         const bookInfo = await databaseQuery.getBookInfo(radioValue,capitalizeFirstLettersOfString(searchValue))
         console.log(bookCount);
         if(!bookCount) return  res.send('sorry no books found')
-        res.send(bookInfo)
+        let html = ''
+        const mappedBooks = bookInfo.map(book =>{
+            return html+=`<div style="background:black;color:white">
+                <p>${book.title}</p>
+                <p>${book.author}</p>
+                <p>${book.isbn}</p>
+                <p>${book.year}</p>
+            </div>`
+        })
+
+        console.log(mappedBooks)
+        res.send(html)
     }catch(err){
         console.log(err)
     }

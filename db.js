@@ -5,14 +5,17 @@ db.loadDatabase()
 exports.getBookCount = (radioValue,searchValue)=>{
     return new Promise((resolve,reject)=>{
 
+        const regexTitle = new RegExp("\\b"+searchValue+"\\b",'ig')
+        const regexAuthor = new RegExp(searchValue,'ig')
+
         if(radioValue === 'title'){
-        db.count({title:searchValue},(err,count)=>{
+        db.count({title:{$regex:regexTitle}},(err,count)=>{
             if(err) reject(err)
             resolve(count)
         })
     }
     else if(radioValue === 'author'){
-        db.count({author:searchValue},(err,count)=>{
+        db.count({author:{$regex:regexAuthor}},(err,count)=>{
             if(err) reject(err)
             resolve(count)
         })
@@ -37,14 +40,19 @@ exports.getBookCount = (radioValue,searchValue)=>{
 exports.getBookInfo = (radioValue,searchValue)=>{
     return new Promise((resolve,reject)=>{
 
+        const regexTitle = new RegExp("\\b"+searchValue+"\\b",'ig')
+        const regexAuthor = new RegExp(searchValue,'ig')
+
+        // const regex = new RegExp(searchValue,'ig')
+
         if(radioValue === 'title'){
-        db.find({title:searchValue},(err,count)=>{
+        db.find({title:{$regex:regexTitle}},(err,count)=>{
             if(err) reject(err)
             resolve(count)
         })
     }
     else if(radioValue === 'author'){
-        db.find({author:searchValue},(err,count)=>{
+        db.find({author:{$regex: regexAuthor}},(err,count)=>{
             if(err) reject(err)
             resolve(count)
         })
