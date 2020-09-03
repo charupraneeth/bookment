@@ -1,6 +1,7 @@
 const express = require('express')
 const bodyParser = require('body-parser')
 const databaseQuery = require('../db')
+const path = require('path')
 
 // const Datastore = require('nedb')
 // const db = new Datastore({filename: './databases/books.db'})
@@ -10,11 +11,28 @@ const router = express.Router()
 
 router.use(bodyParser.urlencoded({extended:true}))
 
+function redirectLogin(req,res,next){
+    if(!req.session.userId) {
+        res.redirect('/login')
+    }else{
+        next()
+    }
+}
 
-router.get('/',(req,res)=>{
-    res.redirect('/')
+function redirectSearch(req,res,next){
+    if(req.session.userId) {
+        res.redirect('/search')
+    }else{
+        next()
+    }
+}
+
+router.get('/',redirectLogin,(req,res)=>{
+    res.sendFile(path.join(__dirname,'../public','search.html'))
 })
-router.post('/',async (req,res)=>{
+
+
+router.post('/',redirectLogin,async (req,res)=>{
     const radioValue = req.body.formRadio
     const searchValue = req.body.search
 
