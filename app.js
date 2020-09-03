@@ -10,6 +10,8 @@ const port = process.env.PORT || 1337
 
 app.listen(port,console.log(`port ${port} is currently on`))
 
+app.use(express.json())
+
 app.use(express.static(path.join(__dirname,'public')))
 
 app.use('/api',require('./routes/api'))

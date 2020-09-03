@@ -10,6 +10,10 @@ const router = express.Router()
 
 router.use(bodyParser.urlencoded({extended:true}))
 
+
+router.get('/',(req,res)=>{
+    res.redirect('/')
+})
 router.post('/',async (req,res)=>{
     const radioValue = req.body.formRadio
     const searchValue = req.body.search
@@ -26,12 +30,10 @@ router.post('/',async (req,res)=>{
         return str.join(" ");
     }
 
-
-
     try{
         const bookCount = await databaseQuery.getBookCount(radioValue,capitalizeFirstLettersOfString(searchValue))
         const bookInfo = await databaseQuery.getBookInfo(radioValue,capitalizeFirstLettersOfString(searchValue))
-        console.log(bookCount);
+        // console.log(bookCount);
         if(!bookCount) return  res.send('sorry no books found')
         let html = ''
         const mappedBooks = bookInfo.map(book =>{
@@ -42,8 +44,7 @@ router.post('/',async (req,res)=>{
                 <p>${book.year}</p>
             </div>`
         })
-
-        console.log(mappedBooks)
+        
         res.send(html)
     }catch(err){
         console.log(err)
