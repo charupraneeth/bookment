@@ -3,9 +3,20 @@ const path = require('path')
 const app = express()
 const session = require('express-session')
 const bodyParser = require('body-parser')
+const exphbs = require('express-handlebars')
+
+const NedbStore = require('nedb-session-store')(session);
+
 // const Datastore = require('nedb')
 // const db = new Datastore({filename: './databases/books.db'})
 // db.loadDatabase()
+
+app.engine('.hbs', exphbs({extname: '.hbs'}));
+app.set('view engine', '.hbs');
+
+// app.get('/',(req,res)=>{
+//     res.render('home')
+// })
 
 
 const port = process.env.PORT || 1337
@@ -30,7 +41,8 @@ app.use(session({
         maxAge:1000*60,
         sameSite:true,
         secure:false
-    }
+    },
+    store: new NedbStore({filename:'./databases/sessions.db'})
 }))
 
 // setting up limit of json 

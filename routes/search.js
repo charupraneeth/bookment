@@ -49,21 +49,20 @@ router.post('/',redirectLogin,async (req,res)=>{
     }
 
     try{
-        const bookCount = await databaseQuery.getBookCount(radioValue,capitalizeFirstLettersOfString(searchValue))
+        // const bookCount = await databaseQuery.getBookCount(radioValue,capitalizeFirstLettersOfString(searchValue))
         const bookInfo = await databaseQuery.getBookInfo(radioValue,capitalizeFirstLettersOfString(searchValue))
         // console.log(bookCount);
-        if(!bookCount) return  res.send('sorry no books found')
-        let html = ''
-        const mappedBooks = bookInfo.map(book =>{
-            return html+=`<div style="background:black;color:white">
-                <p>${book.title}</p>
-                <p>${book.author}</p>
-                <p>${book.isbn}</p>
-                <p>${book.year}</p>
-            </div>`
-        })
-        
-        res.send(html)
+        if(!bookInfo.length) return  res.send('sorry no books found')
+        // let html = ''
+        // const mappedBooks = bookInfo.map(book =>{
+        //     return html+=`<div style="background:black;color:white">
+        //         <p>${book.title}</p>
+        //         <p>${book.author}</p>
+        //         <p>${book.isbn}</p>
+        //         <p>${book.year}</p>
+        //     </div>`
+        // })
+        res.render('search',{books:bookInfo})
     }catch(err){
         console.log(err)
     }

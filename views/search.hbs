@@ -1,0 +1,14 @@
+<div>
+    {{#each books}}
+            <div class="card my-2">
+                <div class="card-header">
+                    Title : {{title}}
+                </div>
+                <div class="card-body">
+                    <h5 class="card-title">Author : {{author}}</h5>
+                    <p class="card-text">isbn : {{isbn}}</p>
+                    <a href="/api/{{isbn}}" class="btn btn-primary">Go somewhere</a>
+                </div>
+            </div>
+    {{/each}}
+</div>
