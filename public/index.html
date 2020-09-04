@@ -1,64 +1,55 @@
-<!DOCTYPE html>
+
+<!doctype html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Bookment | Registeration</title>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
 
-    <!-- Font Icon -->
-    <link rel="stylesheet" href="fonts/material-icon/css/material-design-iconic-font.min.css">
+    <title>Cover Template for Bootstrap</title>
 
-    <!-- Main css -->
-    <link rel="stylesheet" href="css/style_copy.css">
-</head>
-<body>
 
-    <div class="main">
+    <!-- Bootstrap core CSS -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
 
-        <!-- Sign up form -->
-        <section class="signup">
-            <div class="container">
-                <div class="signup-content">
-                    <div class="signup-form">
-                        <h2 class="form-title">Sign up</h2>
-                        <form method="POST" action="/register" class="register-form" id="register-form" name="form">
-                            <div class="form-group">
-                                <label for="name"><i class="zmdi zmdi-account material-icons-name"></i></label>
-                                <input type="text" name="name" id="name" placeholder="Your Name" required/>
-                            </div>
-                            <div class="form-group">
-                                <label for="email"><i class="zmdi zmdi-email"></i></label>
-                                <input type="email" placeholder="Your email" name="email" id="email" required/>
-                            </div>
-                            <div class="form-group">
-                                <label for="password"><i class="zmdi zmdi-lock"></i></label>
-                                <input type="password" placeholder="Password" name="password" id="password" required/>
-                            </div>
-                            <div class="form-group">
-                                <label for="repeat"><i class="zmdi zmdi-lock-outline"></i></label>
-                                <input type="password" name="repeat" id="repeat" placeholder="Repeat your password" required/>
-                            </div>
-                            <div class="form-group">
-                                <input type="checkbox" name="agree-name" id="agree-term" class="agree-term" required />
-                                <label for="agree-term"  class="label-agree-term"><span><span></span></span>I agree all statements in  <a href="/terms" class="term-service">Terms of service</a></label>
-                            </div>
-                            <div class="form-group form-button">
-                                <button type="submit"  id="registerbtn" class="form-submit">Register</button>
-                            </div>
-                        </form>
-                    </div>
-                    <div class="signup-image">
-                        <figure><img src="images/signup-image.jpg" alt="sing up image"></figure>
-                        <a href="/login" class="signup-image-link">I am already member</a>
-                    </div>
-                </div>
-            </div>
-        </section>
+    <!-- Custom styles for this template -->
+    <link href="./css/cover.css" rel="stylesheet">
+  </head>
 
-        
-    <!-- JS -->
-    <!-- <script src="vendor/jquery/jquery.min.js"></script> -->
-    <script src="js/script.js"></script>
-</body><!-- This templates was made by Colorlib (https://colorlib.com) -->
+  <body class="text-center">
+
+    <div class="cover-container d-flex h-100 p-3 mx-auto flex-column">
+      <header class="masthead mb-auto">
+        <div class="inner">
+          <h3 class="masthead-brand">Bookment</h3>
+          <nav class="nav nav-masthead justify-content-center">
+            <a class="nav-link active" href="/">Home</a>
+            <a class="nav-link" href="/login">Login</a>
+            <a class="nav-link" href="/register">Signup</a>
+          </nav>
+        </div>
+      </header>
+
+      <main role="main" class="inner cover">
+        <h1 class="cover-heading">BOOKMENT</h1>
+        <p class="lead">Bookment is a simple book reviewing website where you can read others review and post your own for over 5000 books</p>
+        <p class="lead">
+          <a href="/login" class="btn btn-lg btn-secondary">Join us</a>
+        </p>
+      </main>
+
+      <footer class="mastfoot mt-auto">
+        <div class="inner">
+          <p>Cover template for <a href="https://bookment.herokuapp.com/">Bookment</a>, by <a href="https://twitter.com/mdo">@mdo</a>.</p>
+        </div>
+      </footer>
+    </div>
+
+
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+  </body>
 </html>

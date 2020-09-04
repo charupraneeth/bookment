@@ -14,7 +14,7 @@ function redirectLogin(req,res,next){
 }
 
 function redirectSearch(req,res,next){
-    if(req.session.userId) {
+    if(req.session.userId) {    
         res.redirect('/search')
     }else{
         next()
@@ -66,7 +66,6 @@ router.post('/',redirectSearch,async (req,res)=>{
         req.session.userId = id
         req.session.username = username
         req.session.email = email
-        console.log('user password match')
         res.redirect('/search')
    
 })

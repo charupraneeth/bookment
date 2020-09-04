@@ -27,7 +27,7 @@ function redirectSearch(req,res,next){
 
 
 router.get('/',redirectSearch,(req,res)=>{
-    res.redirect('/register')
+    res.sendFile(path.join(__dirname,'../public','register.html'))
 })
 
 

@@ -1,6 +1,8 @@
 const express = require('express')
+require('dotenv').config()
 const path = require('path')
 const app = express()
+
 const session = require('express-session')
 const bodyParser = require('body-parser')
 const exphbs = require('express-handlebars')
@@ -30,19 +32,19 @@ app.use(bodyParser.json())
 
 app.use(express.static(path.join(__dirname,'public')))
 
-
-
+const inProduction =  app.get('env') === 'production'
 app.use(session({
-    name:'sid',
+    name:process.env.SESSION_NAME,
     resave:false,
     saveUninitialized:false,
-    secret:'a secret',
+    secret:process.env.SESSION_SECRET,
     cookie:{
         maxAge:1000*60,
         sameSite:true,
-        secure:false
+        secure:inProduction
     },
-    store: new NedbStore({filename:'./databases/sessions.db'})
+    store: new NedbStore({filename:'./databases/sessions.db'}),
+    unset:"destroy"
 }))
 
 // setting up limit of json 
@@ -68,7 +70,7 @@ app.use('/api',require('./routes/api'))
 
 // getting terms route
 app.get('/terms',(req,res)=>{
-    res.status(500).send(`<h1>We'll post it <br> as soon as we make it</h1><a href='/register'>Go back</a>`)
+    res.status(500).send(`<div style="text-align:center"><h1 >We'll post it <br> as soon as we make it</h1><a href='/register'>Go back</a></div>`)
 })
 
 app.use('/register',require('./routes/register'))
@@ -86,11 +88,10 @@ app.use('/search', require('./routes/search'))
 
 
 app.get('/logout',redirectLogin,(req,res)=>{
-    console.log('session destroyed')
     req.session.destroy(err=>{
-        if(err) return res.redirect('/home')
-    res.clearCookie('sid')
-    res.redirect('/login')
+        if(err) return res.redirect('/search')
     })
+    res.clearCookie(process.env.SESSION_NAME)
+    res.redirect('/login')
 })
 

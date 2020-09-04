@@ -1,6 +1,6 @@
 const Datastore = require('nedb')
-const db = new Datastore({filename: './databases/books.db'})
-db.loadDatabase()
+const db = new Datastore({filename: './databases/books.db',autoload:true})
+
 
 exports.getBookCount = (radioValue,searchValue)=>{
     return new Promise((resolve,reject)=>{
