@@ -31,6 +31,8 @@ app.use(express.json())
 app.use(bodyParser.urlencoded({extended:true}))
 app.use(bodyParser.json())
 
+app.set('trust proxy',1)
+
 app.use(express.static(path.join(__dirname,'public')))
 
 const inProduction =  app.get('env') === 'production'
