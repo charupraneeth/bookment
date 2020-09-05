@@ -1,5 +1,6 @@
 node_modules
 
 *.map
-databases/session.db
+databases/sessions.db
+
 
