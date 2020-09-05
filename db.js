@@ -131,9 +131,9 @@ exports.createReview = (data)=>{
         })
     })  
 }
-exports.addReview = (isbn,review)=>{
+exports.addReview = (isbn,reviewObject)=>{
     return new Promise((resolve,reject)=>{
-        db.reviews.update({isbn:isbn},{$push:{reviews:review}},(err,docs)=>{
+        db.reviews.update({isbn:isbn},{$push:{reviews:reviewObject}},(err,docs)=>{
             if(err) reject(err)
             resolve(docs)
         })

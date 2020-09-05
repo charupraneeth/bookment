@@ -108,14 +108,21 @@ router.get('/:isbn',redirectLogin,async (req,res)=>{
     }
 })
 router.post('/:isbn',async(req,res)=>{
+
+    const today = new Date();
+    const date = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
+    const time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
+    const dateTime = date+' '+time;
+
     const review = req.body.review
     const isbn = req.params.isbn
-    const data = {isbn,reviews:[review]}
+    const data = {isbn,reviews:[{email:req.session.email,dateTime,review:review}]}
+    const reviewObject = {email:req.session.email,review:review} 
     try{
     const reviews = await databaseQuery.getReview(isbn)
 
     if(reviews){
-        const response = await databaseQuery.addReview(isbn,review)
+        const response = await databaseQuery.addReview(isbn,reviewObject)
     }
     else{
         const response = await databaseQuery.createReview(data)

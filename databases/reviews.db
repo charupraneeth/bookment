@@ -1,3 +1,3 @@
-{"isbn":"1400066212","reviews":["good","okay","alright"],"_id":"gvxVbIdMAyxmpa3U"}
-{"isbn":"0553588249","reviews":["above avg","alright"],"_id":"iw4EPOZN0s9svVmb"}
-{"isbn":"0521293731","reviews":["very bad book"],"_id":"iwmGcbCPBNCqlq2B"}
+{"isbn":"0553588249","reviews":[{"email":"shyhawk@gmail.com","dateTime":"2020-9-5 19:58:43","review":"Niceon e"}],"_id":"4kTGkwkGN1L5xlWH"}
+    {"isbn":"0553588249","reviews":[{"email":"shyhawk@gmail.com","dateTime":"2020-9-5 19:58:43","review":"Niceon e"},{"email":"new@gmail.com","review":"Same one"}],"_id":"4kTGkwkGN1L5xlWH"}
+{"isbn":"0743482832","reviews":[{"email":"new@gmail.com","dateTime":"2020-9-5 20:1:9","review":"This is good book"}],"_id":"UszYrloggoKiQ217"}

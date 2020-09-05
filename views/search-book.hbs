@@ -16,10 +16,14 @@
 
     {{#if reviews}}
         {{#each reviews}}
-        <div class="border my-2">
-            {{!-- <h1>{{email}},{{username}}</h1> --}}
-            <p class="h3 text-primary">{{this}}</p>
-        </div>
+            <div class="card">
+            <h5 class="card-header">{{email}}</h5>
+            <div class="card-body">
+                <p class="card-title">On {{dateTime}} said</p>
+                <h5 class="card-text">{{review}}</h5>
+                {{!-- <a href="#" class="btn btn-primary">Go somewhere</a> --}}
+            </div>
+            </div>
         {{/each}}
     {{/if}}
     <form action="/search/{{isbn}}" method="POST">
