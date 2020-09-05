@@ -3,7 +3,7 @@ const router = express.Router()
 const bcrypt = require('bcrypt')
 const path = require('path')
 
-const database =    require('../db-users') 
+const database = require('../db') 
 
 function redirectLogin(req,res,next){
     if(!req.session.userId) {

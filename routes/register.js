@@ -6,7 +6,7 @@ const path = require('path')
 
 // const db = new Datastore('database.db')
 // db.loadDatabase()
-const database =    require('../db-users') 
+const database =    require('../db') 
 
 
 function redirectLogin(req,res,next){

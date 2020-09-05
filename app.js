@@ -6,6 +6,7 @@ const app = express()
 const session = require('express-session')
 const bodyParser = require('body-parser')
 const exphbs = require('express-handlebars')
+const databaseQuery = require('./db')
 
 const NedbStore = require('nedb-session-store')(session);
 
@@ -39,7 +40,7 @@ app.use(session({
     saveUninitialized:false,
     secret:process.env.SESSION_SECRET,
     cookie:{
-        maxAge:1000*60,
+        maxAge:1000*60*3,
         sameSite:true,
         secure:inProduction
     },
@@ -88,10 +89,13 @@ app.use('/search', require('./routes/search'))
 
 
 app.get('/logout',redirectLogin,(req,res)=>{
+    // databaseQuery.removeSession(req.session.userId)
     req.session.destroy(err=>{
         if(err) return res.redirect('/search')
     })
+
     res.clearCookie(process.env.SESSION_NAME)
+
     res.redirect('/login')
 })
 

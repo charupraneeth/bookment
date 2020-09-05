@@ -1,5 +1,13 @@
-const Datastore = require('nedb')
-const db = new Datastore({filename: './databases/books.db',autoload:true})
+const Datastore = require('nedb');
+const db= {}
+db.books = new Datastore({filename:'./databases/books.db'})
+db.users = new Datastore({filename:'./databases/users.db',autoload:true})
+db.reviews = new Datastore({filename:'./databases/reviews.db'})
+// db.sessions = new Datastore({filename:'./databases/sessions.db'})
+// db.sessions.loadDatabase()
+db.books.loadDatabase()
+db.reviews.loadDatabase()
+
 
 
 exports.getBookCount = (radioValue,searchValue)=>{
@@ -9,26 +17,26 @@ exports.getBookCount = (radioValue,searchValue)=>{
         const regexAuthor = new RegExp(searchValue,'ig')
 
         if(radioValue === 'title'){
-        db.count({title:{$regex:regexTitle}},(err,count)=>{
+        db.books.count({title:{$regex:regexTitle}},(err,count)=>{
             if(err) reject(err)
             resolve(count)
         })
     }
     else if(radioValue === 'author'){
-        db.count({author:{$regex:regexAuthor}},(err,count)=>{
+        db.books.count({author:{$regex:regexAuthor}},(err,count)=>{
             if(err) reject(err)
             resolve(count)
         })
     }
     else if(radioValue === 'isbn'){
-        db.count({isbn:searchValue},(err,count)=>{
+        db.books.count({isbn:searchValue},(err,count)=>{
             if(err) reject(err)
             resolve(count)
         })
     }
     else if(radioValue === 'year'){
 
-        db.count({year:searchValue},(err,count)=>{
+        db.books.count({year:searchValue},(err,count)=>{
             if(err) reject(err)
             resolve(count)
         })
@@ -46,29 +54,88 @@ exports.getBookInfo = (radioValue,searchValue)=>{
         // const regex = new RegExp(searchValue,'ig')
 
         if(radioValue === 'title'){
-        db.find({title:{$regex:regexTitle}},(err,count)=>{
+        db.books.find({title:{$regex:regexTitle}},(err,count)=>{
             if(err) reject(err)
             resolve(count)
         })
     }
     else if(radioValue === 'author'){
-        db.find({author:{$regex: regexAuthor}},(err,count)=>{
+        db.books.find({author:{$regex: regexAuthor}},(err,count)=>{
             if(err) reject(err)
             resolve(count)
         })
     }
     else if(radioValue === 'isbn'){
-        db.find({isbn:searchValue},(err,count)=>{
+        db.books.find({isbn:searchValue},(err,count)=>{
             if(err) reject(err)
             resolve(count)
         })
     }
     else if(radioValue === 'year'){
 
-        db.find({year:searchValue},(err,count)=>{
+        db.books.find({year:searchValue},(err,count)=>{
             if(err) reject(err)
             resolve(count)
         })
     }
+    })
+}
+
+
+// from users.db
+exports.addUser = (name,email,password,timestamp)=>{
+    user = {
+        username:name,
+        email:email,
+        password:password,
+        timestamp:timestamp
+    }
+    db.users.insert(user)
+}
+
+exports.getUser = (email)=>{
+
+    return new Promise((resolve,reject)=>{
+        db.users.find({email:email},(err,docs)=>{
+            if(err) reject(err)
+            resolve(docs)
+        })
+
+    })       
+}
+
+// from sessions.db
+
+// exports.removeSession = (id)=>{
+//     db.sessions.remove({_id:id},{multi:true},(err,numRemoved)=>{
+//         if(err) return console.log(err)
+//         return console.log(numRemoved+" session columns removed")
+//     })
+// }
+
+// from reviews.db
+
+exports.getReview = (isbn)=>{
+    return new Promise((resolve,reject)=>{
+        db.reviews.findOne({isbn:isbn},(err,docs)=>{
+            if(err) reject(err)
+            resolve(docs)
+        })
+    })
+}
+exports.createReview = (data)=>{
+    return new Promise((resolve,reject)=>{
+        db.reviews.insert(data,(err,docs)=>{
+            if(err) reject(err)
+            resolve(docs)
+        })
+    })  
+}
+exports.addReview = (isbn,review)=>{
+    return new Promise((resolve,reject)=>{
+        db.reviews.update({isbn:isbn},{$push:{reviews:review}},(err,docs)=>{
+            if(err) reject(err)
+            resolve(docs)
+        })
     })
 }

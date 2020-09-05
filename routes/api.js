@@ -1,10 +1,9 @@
 const express = require('express')
 const Datastore = require('nedb')
 const router = express.Router()
-const database = require('../db')
+const databaseQuery = require('../db')
 
-const db = new Datastore({filename: './databases/books.db'})
-db.loadDatabase()
+
 
 const app = express()
 
@@ -15,7 +14,7 @@ router.get('/:isbn',async(req,res)=>{
     }
 
     try {
-        const book = await database.getBookInfo('isbn',req.params.isbn) 
+        const book = await databaseQuery.getBookInfo('isbn',req.params.isbn) 
         if(!book.length){
             return res.send('sorry no books found')
         }

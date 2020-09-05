@@ -1,0 +1,32 @@
+<div class="container mt-3">
+    {{#if message}}
+    <h1 class="text-danger">{{message}}</h1>
+    {{/if}}
+    {{#if title}}
+    <div>
+        <div class="display-3 font-weight-normal">Title : {{title}}</div>
+        <div class="h1">Author : {{author}}</div>
+        <div class="h2">Year : {{year}}</div>
+        <div class="h3">ISBN : {{isbn}}</div>
+    </div>
+    <div>
+        <h2>The average rating on goodreads is : <span class="text-primary">{{rating}}</span></h2>
+    </div>
+    {{/if}}
+
+    {{#if reviews}}
+        {{#each reviews}}
+        <div class="border my-2">
+            {{!-- <h1>{{email}},{{username}}</h1> --}}
+            <p class="h3 text-primary">{{this}}</p>
+        </div>
+        {{/each}}
+    {{/if}}
+    <form action="/search/{{isbn}}" method="POST">
+    <div class="form-group">
+        <label for="reivew" class="h4 text-secondary">Add a review</label>
+        <textarea class="form-control" name="review" id="review" rows="3"></textarea>
+    </div>
+    <button type="submit" class="btn btn-secondary">Post</button>
+    </form>
+</div>
