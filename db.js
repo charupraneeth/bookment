@@ -1,12 +1,11 @@
 const Datastore = require('nedb');
 const db= {}
-db.books = new Datastore({filename:'./databases/books.db'})
+db.books = new Datastore({filename:'./databases/books.db',autoload:true})
 db.users = new Datastore({filename:'./databases/users.db',autoload:true})
-db.reviews = new Datastore({filename:'./databases/reviews.db'})
+db.reviews = new Datastore({filename:'./databases/reviews.db',autoload:true})
 // db.sessions = new Datastore({filename:'./databases/sessions.db'})
 // db.sessions.loadDatabase()
-db.books.loadDatabase()
-db.reviews.loadDatabase()
+
 
 
 

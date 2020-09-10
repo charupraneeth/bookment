@@ -46,8 +46,7 @@ app.use(session({
         sameSite:true,
         secure:inProduction
     },
-    store: new NedbStore({filename:'./databases/sessions.db'}),
-    unset:"destroy"
+    store: NedbStore({filename:'./databases/sessions.db'}),
 }))
 
 // setting up limit of json 
